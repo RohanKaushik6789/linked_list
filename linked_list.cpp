@@ -6,7 +6,7 @@ struct node{
  int data;
  struct node *next;
 }* start=NULL;
-struct node * end= NULL;
+struct node *end= NULL;
 
 void createList(int a[],int n)
 {
@@ -156,7 +156,17 @@ void deleteFirst()
 }
 void deleteLast()
 {
-
+    struct node * temp= start;
+    int i=1;
+    int cou=count();
+    while(i<cou-1)
+    {
+        temp=temp->next;
+        i++;
+    }
+    free(end);
+    temp->next=NULL;
+    end=temp;
 }
 
 int main()
@@ -174,7 +184,8 @@ int main()
  printf("\n8 . Sum of all elements");
  printf("\n9 . Sum of elements through recursion");
  printf("\n10. Delete the first element from the list");
- printf("\n11. Exit");
+ printf("\n11. Delete the last element from the list");
+ printf("\n12. Exit");
 
  while(1)
  {
@@ -220,11 +231,15 @@ int main()
 	printf("sum through recursion is : %d",rSum(start));
 	break;
    case 10:
-	printf("successfully first element deleted");
 	deleteFirst();
+	printf("successfully first element deleted");
 	break;
    case 11:
-	exit(1);
+	deleteLast();
+	printf("successfully last element deleted");
+	break;
+   case 12:
+    exit(1);
    default:
 	 printf("SORRY!!!! Enter a valid choice");
 
