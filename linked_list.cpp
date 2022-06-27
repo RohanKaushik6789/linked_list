@@ -168,6 +168,96 @@ void deleteLast()
     temp->next=NULL;
     end=temp;
 }
+void deleteAtPosition(int pos)
+{
+   int i=1;
+   int data;
+   struct node * temp= start;
+   while(i<pos-1)
+   {
+       temp=temp->next;
+       i++;
+   }
+   struct node *del = temp->next;
+   temp->next=temp->next->next;
+   free(del);
+   printf("successfully deleted");
+}
+
+/*void reverseList()
+{
+   struct node * stemp = start;
+   struct node * etemp = end;
+   int s = 1;
+   int e = count();
+   int tempdata = NULL;
+
+
+   while(s<e)
+   {
+       tempdata = stemp->data;
+       stemp->data=etemp->data;
+       etemp->data=temp->data;
+       s++;
+       e--;
+       stemp=stemp
+   }
+
+
+}*/
+
+
+
+
+int maximum()
+{
+    struct node * temp= start;
+    int max=temp->data;
+    while(temp!=NULL)
+    {
+        if(max<temp->data)
+        {
+            max=temp->data;
+        }
+        temp=temp->next;
+    }
+    return max;
+}
+
+int minimum()
+{
+    struct node * temp =start;
+    int min = temp->data;
+    while(temp!=NULL)
+    {
+        if(min > temp->data)
+        {
+            min = temp->data;
+        }
+        temp = temp->next;
+    }
+    return min;
+}
+
+int searchElement(int value)
+{
+    struct node * temp = start;
+    int position = 1;
+    while(temp!=NULL)
+    {
+        if(value==temp->data)
+        {
+            return position;
+        }
+        else
+        {
+            temp=temp->next;
+            position++;
+        }
+    }
+    return 0;
+}
+
 
 int main()
 {
@@ -185,7 +275,11 @@ int main()
  printf("\n9 . Sum of elements through recursion");
  printf("\n10. Delete the first element from the list");
  printf("\n11. Delete the last element from the list");
- printf("\n12. Exit");
+ printf("\n12. Delete the element from particular position");
+ printf("\n13. Maximum in all elements ");
+ printf("\n14. Minimum in all elements ");
+ printf("\n15. Get the position of any element in the list ");
+ printf("\n16. Exit");
 
  while(1)
  {
@@ -196,15 +290,16 @@ int main()
    case 1:
 	int num,i;
 	int * arr;
-	printf("Enter the number of elements for which you want to create linked list ");
+	printf("Enter the number of elements for which you want to create linked list :");
 	scanf("%d",&num);
 	arr=(int *)malloc(num * sizeof(int));
-	printf("enter %d elements in linked list",num);
+	printf("enter %d elements in linked list \n",num);
 	for(i=0;i<num;i++)
 	{
 	  scanf("%d",&arr[i]);
 	}
 	createList(arr,num);
+	printf("List created successflly");
 	break;
    case 2:
 	insertAtFront();
@@ -239,10 +334,35 @@ int main()
 	printf("successfully last element deleted");
 	break;
    case 12:
+      int pos;
+      printf("Enter the position at which you want to delete : ");
+      scanf("%d",&pos);
+      deleteAtPosition(pos);
+      break;
+   case 13:
+      printf("Maximum : %d",maximum());
+      break;
+   case 14:
+      printf("Minimum : %d",minimum());
+      break;
+   case 15:
+      int val;
+      printf("enter the element you want to search :");
+      scanf("%d",&val);
+      if(searchElement(val)!=0)
+      {
+          printf("Position of searched element is : %d",searchElement(val));
+      }
+      else
+      {
+          printf("Element is not found int the list");
+      }
+
+      break;
+   case 16:
     exit(1);
    default:
 	 printf("SORRY!!!! Enter a valid choice");
-
  }
  }
  return 1;
